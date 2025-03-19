@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ArrowLeft, Download, Info, DollarSign, Home, Clock, Alert } from 'lucide-react';
+import { ArrowLeft, Download, Info, DollarSign, Home, Clock, AlertTriangle } from 'lucide-react';
 import Button from './ui-components/Button';
 import Badge from './ui-components/Badge';
 import { cn } from '../lib/utils';
