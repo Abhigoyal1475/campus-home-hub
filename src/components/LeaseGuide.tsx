@@ -1,14 +1,15 @@
 
 import React from 'react';
-import { CreditCard, Wifi, Lightbulb, Lock, Info } from 'lucide-react';
+import { CreditCard, Wifi, Lightbulb, Lock, Info, FileText } from 'lucide-react';
 import Button from './ui-components/Button';
 import { cn } from '../lib/utils';
 
 interface LeaseGuideProps {
   className?: string;
+  onViewFees?: () => void;
 }
 
-const LeaseGuide: React.FC<LeaseGuideProps> = ({ className }) => {
+const LeaseGuide: React.FC<LeaseGuideProps> = ({ className, onViewFees }) => {
   return (
     <section className={cn("py-16 bg-accent", className)}>
       <div className="container px-4 mx-auto">
@@ -23,9 +24,10 @@ const LeaseGuide: React.FC<LeaseGuideProps> = ({ className }) => {
             <div className="mt-4 md:mt-0">
               <Button 
                 variant="outline" 
-                leftIcon={<Info size={16} />}
+                leftIcon={<FileText size={16} />}
+                onClick={onViewFees}
               >
-                Want to save up to $700+?
+                View detailed fee breakdown
               </Button>
             </div>
           </div>

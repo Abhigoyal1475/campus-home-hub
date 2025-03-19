@@ -6,9 +6,10 @@ import { cn } from '../lib/utils';
 
 interface HeroProps {
   className?: string;
+  onViewFees?: () => void;
 }
 
-const Hero: React.FC<HeroProps> = ({ className }) => {
+const Hero: React.FC<HeroProps> = ({ className, onViewFees }) => {
   const heroRef = useRef<HTMLDivElement>(null);
 
   // Parallax effect on scroll
@@ -38,7 +39,7 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
       <div ref={heroRef} className="container px-4 mx-auto relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-block px-3 py-1 mb-6 rounded-full bg-primary/10 text-primary animate-fade-in">
-            <span className="text-sm font-medium">Limited time offer for students</span>
+            <span className="text-sm font-medium">Perfect for Indian students!</span>
           </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight animate-fade-in" style={{ animationDelay: '100ms' }}>
@@ -53,7 +54,7 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
             We've negotiated the best deals for you – Get housing, WiFi, electricity, and more at student-friendly rates!
           </p>
           
-          <div className="animate-fade-in" style={{ animationDelay: '400ms' }}>
+          <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in" style={{ animationDelay: '400ms' }}>
             <Button 
               variant="primary" 
               size="lg" 
@@ -61,6 +62,15 @@ const Hero: React.FC<HeroProps> = ({ className }) => {
               rightIcon={<ArrowRight className="ml-1 transition-transform group-hover:translate-x-1" />}
             >
               Start Your Search Now
+            </Button>
+            
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="group"
+              onClick={onViewFees}
+            >
+              View Complete Fee Breakdown
             </Button>
           </div>
         </div>

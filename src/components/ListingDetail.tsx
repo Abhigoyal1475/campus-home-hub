@@ -1,10 +1,11 @@
 
-import React from 'react';
-import { MapPin, Star, DollarSign, Building, Wifi, Dumbbell, Trees, Car, Tag, Clock, Check, X, Info, Zap, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { MapPin, Star, DollarSign, Building, Wifi, Dumbbell, Trees, Car, Tag, Clock, Check, X, Info, Zap, ArrowRight, Download, Users, Eye } from 'lucide-react';
 import { ListingProps } from './ListingCard';
 import Button from './ui-components/Button';
 import Badge from './ui-components/Badge';
 import { cn } from '../lib/utils';
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from './ui/collapsible';
 
 interface ListingDetailProps {
   listing: ListingProps;
@@ -13,6 +14,8 @@ interface ListingDetailProps {
 }
 
 const ListingDetail: React.FC<ListingDetailProps> = ({ listing, onBack, className }) => {
+  const [isImageExpanded, setIsImageExpanded] = useState(false);
+  
   const costBreakdown = [
     { title: 'Application Fee', amount: '$50-100', oneTime: true },
     { title: 'Security Deposit', amount: '$500-1000', oneTime: true },
@@ -98,6 +101,18 @@ const ListingDetail: React.FC<ListingDetailProps> = ({ listing, onBack, classNam
                   A perfect student apartment located near the university campus. This {listing.isFurnished ? 'furnished' : 'unfurnished'} property offers modern amenities and a convenient location for students.
                 </p>
                 
+                {listing.popularWith && listing.popularWith.length > 0 && (
+                  <div className="mb-4 p-3 bg-primary/5 rounded-lg flex items-center">
+                    <Users size={18} className="text-primary mr-2 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium">Popular with {listing.popularWith.join(', ')}</p>
+                      <p className="text-sm text-muted-foreground">
+                        This property has a strong community of students from these backgrounds
+                      </p>
+                    </div>
+                  </div>
+                )}
+                
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                   {listing.amenities.map((amenity, index) => (
                     <div key={index} className="flex items-center">
@@ -144,6 +159,56 @@ const ListingDetail: React.FC<ListingDetailProps> = ({ listing, onBack, classNam
                   >
                     Start Application
                   </Button>
+                </div>
+              </div>
+              
+              {/* Fee Breakdown Image */}
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold mb-4">Complete Fee Breakdown</h2>
+                
+                <div className="relative">
+                  <Collapsible 
+                    open={isImageExpanded} 
+                    onOpenChange={setIsImageExpanded}
+                    className="w-full"
+                  >
+                    <div className="border border-border rounded-lg overflow-hidden mb-4">
+                      <CollapsibleTrigger asChild>
+                        <div className="cursor-pointer">
+                          <img 
+                            src="/lovable-uploads/e5213118-b9dc-4047-8899-900af6bf8836.png" 
+                            alt="Fee Breakdown Chart" 
+                            className={cn(
+                              "w-full h-auto transition-all duration-300",
+                              isImageExpanded ? "" : "max-h-[200px] object-cover object-top"
+                            )}
+                          />
+                          {!isImageExpanded && (
+                            <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-background to-transparent flex items-end justify-center pb-2">
+                              <Badge variant="outline" className="bg-background/80">
+                                <Eye size={14} className="mr-1" /> 
+                                Click to view complete fee breakdown
+                              </Badge>
+                            </div>
+                          )}
+                        </div>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <div className="p-4 bg-background">
+                          <p className="text-sm text-muted-foreground mb-3">
+                            This chart shows all potential fees associated with renting an apartment. Remember that not all properties charge all these fees.
+                          </p>
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            leftIcon={<Download size={14} />}
+                          >
+                            Download Fee Chart
+                          </Button>
+                        </div>
+                      </CollapsibleContent>
+                    </div>
+                  </Collapsible>
                 </div>
               </div>
             </div>

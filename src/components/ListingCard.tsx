@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { MapPin, Star, DollarSign, Building, Wifi, Dumbbell, Trees, Car, Tag } from 'lucide-react';
+import { MapPin, Star, DollarSign, Building, Wifi, Dumbbell, Trees, Car, Tag, Users, Home } from 'lucide-react';
 import Badge from './ui-components/Badge';
 import Button from './ui-components/Button';
 import { cn } from '../lib/utils';
@@ -18,6 +18,7 @@ export interface ListingProps {
   promoTag: string;
   imageUrl: string;
   discount: number;
+  popularWith?: string[];
   className?: string;
   style?: React.CSSProperties;
   onCompare?: (id: string) => void;
@@ -37,7 +38,9 @@ const ListingCard: React.FC<ListingProps> = ({
   promoTag,
   imageUrl,
   discount,
+  popularWith,
   className,
+  style,
   onCompare,
   onView
 }) => {
@@ -59,6 +62,7 @@ const ListingCard: React.FC<ListingProps> = ({
         "group bg-white rounded-xl overflow-hidden shadow-soft border border-primary/5 transition-all duration-300 hover:shadow-glass",
         className
       )}
+      style={style}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -120,6 +124,15 @@ const ListingCard: React.FC<ListingProps> = ({
             <span>{isFurnished ? 'Furnished' : 'Unfurnished'}</span>
           </div>
         </div>
+        
+        {/* Popular with */}
+        {popularWith && popularWith.length > 0 && (
+          <div className="flex items-center mb-3 text-sm">
+            <Users size={14} className="mr-1 text-primary flex-shrink-0" />
+            <span className="text-muted-foreground">Popular with: </span>
+            <span className="ml-1 font-medium">{popularWith.join(', ')}</span>
+          </div>
+        )}
         
         {/* Amenities */}
         <div className="flex flex-wrap gap-2 mb-4">
