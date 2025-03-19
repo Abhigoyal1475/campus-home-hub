@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { 
   MapPin, Star, DollarSign, Building, Wifi, Dumbbell, Trees, Car, Tag, Clock, 
-  Check, X, Info, Zap, ArrowRight, Download, Users, Eye, ShoppingBag, Bus, Walking
+  Check, X, Info, Zap, ArrowRight, Download, Users, Eye, ShoppingBag, Bus, FootprintsIcon
 } from 'lucide-react';
 import { ListingProps } from './ListingCard';
 import Button from './ui-components/Button';
@@ -78,7 +78,7 @@ const ListingDetail: React.FC<ListingDetailProps> = ({ listing, onBack, classNam
   const transportationOptions = [
     { 
       mode: 'Walking', 
-      icon: <Walking size={16} />,
+      icon: <FootprintsIcon size={16} />,
       time: '50 minutes to campus',
       details: 'Not recommended for regular commuting',
       highlight: false
