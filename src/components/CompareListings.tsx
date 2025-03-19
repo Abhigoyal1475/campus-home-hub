@@ -85,7 +85,16 @@ const CompareListings: React.FC<CompareListingsProps> = ({ listings, onBack, cla
               <tr key={item.key} className="border-t border-border">
                 <td className="p-4 font-medium">{item.category}</td>
                 {listings.map((listing) => {
-                  const value = listing[item.key as keyof ListingProps];
+                  // Type-safe way to access properties
+                  let value: React.ReactNode;
+                  if (item.key === 'distance') value = listing.distance;
+                  else if (item.key === 'priceRange') value = listing.priceRange;
+                  else if (item.key === 'isFurnished') value = listing.isFurnished;
+                  else if (item.key === 'rating') value = listing.rating;
+                  else if (item.key === 'society') value = listing.society;
+                  else if (item.key === 'discount') value = listing.discount;
+                  else value = 'N/A';
+                  
                   return (
                     <td key={`${listing.id}-${item.key}`} className="p-4 text-center">
                       {item.isBoolean ? (

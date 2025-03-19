@@ -19,6 +19,7 @@ export interface ListingProps {
   imageUrl: string;
   discount: number;
   className?: string;
+  style?: React.CSSProperties;
   onCompare?: (id: string) => void;
   onView?: (id: string) => void;
 }
