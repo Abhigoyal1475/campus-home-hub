@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { CreditCard, Wifi, Lightbulb, Lock, ArrowDown, ArrowUp, FileText } from 'lucide-react';
 import Button from './ui-components/Button';
 import { cn } from '../lib/utils';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
+import { Drawer, DrawerContent, DrawerTrigger } from './ui/drawer';
 
 interface LeaseGuideProps {
   className?: string;
@@ -27,15 +27,6 @@ interface DetailItem {
 }
 
 const LeaseGuide: React.FC<LeaseGuideProps> = ({ className, onViewFees }) => {
-  const [openCards, setOpenCards] = useState<{ [key: number]: boolean }>({});
-
-  const toggleCard = (index: number) => {
-    setOpenCards(prev => ({
-      ...prev,
-      [index]: !prev[index]
-    }));
-  };
-
   const guideCards: GuideCardProps[] = [
     {
       icon: <CreditCard className="text-primary" size={24} />,
@@ -296,10 +287,8 @@ const LeaseGuide: React.FC<LeaseGuideProps> = ({ className, onViewFees }) => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {guideCards.map((guide, index) => (
-              <Collapsible 
-                key={index} 
-                open={openCards[index]} 
-                onOpenChange={() => toggleCard(index)}
+              <div 
+                key={index}
                 className="glass-card rounded-xl border border-primary/5 hover-lift animate-fade-in overflow-hidden"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
@@ -315,52 +304,49 @@ const LeaseGuide: React.FC<LeaseGuideProps> = ({ className, onViewFees }) => {
                       </li>
                     ))}
                   </ul>
-                  <CollapsibleTrigger className="w-full">
-                    <div className="flex items-center justify-center text-primary text-sm font-medium">
-                      {openCards[index] ? (
-                        <>
-                          <span>Show Less</span>
-                          <ArrowUp size={16} className="ml-1" />
-                        </>
-                      ) : (
-                        <>
-                          <span>See All Options</span>
-                          <ArrowDown size={16} className="ml-1" />
-                        </>
-                      )}
-                    </div>
-                  </CollapsibleTrigger>
-                </div>
-
-                <CollapsibleContent className="p-6 pt-0 border-t border-primary/10 bg-background/50">
-                  <div className="space-y-4">
-                    {guide.details.map((detail, i) => (
-                      <div key={i} className="p-4 rounded-lg bg-background border border-border">
-                        <div className="flex justify-between mb-2">
-                          <h4 className="font-medium">{detail.provider}</h4>
-                          <span className="text-primary font-medium">{detail.cost}</span>
-                        </div>
-                        <p className="text-sm text-muted-foreground mb-2">{detail.plan}</p>
-                        <ul className="space-y-1 mb-2">
-                          {detail.features.map((feature, j) => (
-                            <li key={j} className="text-sm flex items-start">
-                              <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary/80 mt-1.5 mr-2 flex-shrink-0"></span>
-                              {feature}
-                            </li>
+                  <Drawer>
+                    <DrawerTrigger asChild>
+                      <button className="w-full flex items-center justify-center text-primary text-sm font-medium">
+                        <span>See All Options</span>
+                        <ArrowUp size={16} className="ml-1" />
+                      </button>
+                    </DrawerTrigger>
+                    <DrawerContent className="h-[85vh] p-6">
+                      <div className="max-h-[80vh] overflow-y-auto px-4">
+                        <h2 className="text-2xl font-bold mb-4">{guide.title}</h2>
+                        <p className="text-muted-foreground mb-6">{guide.description}</p>
+                        
+                        <div className="space-y-4">
+                          {guide.details.map((detail, i) => (
+                            <div key={i} className="p-4 rounded-lg bg-background border border-border">
+                              <div className="flex justify-between mb-2">
+                                <h4 className="font-medium">{detail.provider}</h4>
+                                <span className="text-primary font-medium">{detail.cost}</span>
+                              </div>
+                              <p className="text-sm text-muted-foreground mb-2">{detail.plan}</p>
+                              <ul className="space-y-1 mb-2">
+                                {detail.features.map((feature, j) => (
+                                  <li key={j} className="text-sm flex items-start">
+                                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary/80 mt-1.5 mr-2 flex-shrink-0"></span>
+                                    {feature}
+                                  </li>
+                                ))}
+                              </ul>
+                              {detail.referralCode && (
+                                <div className="text-sm mt-2">
+                                  <span className="bg-primary/10 text-primary px-2 py-1 rounded font-mono">
+                                    Referral: {detail.referralCode}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
                           ))}
-                        </ul>
-                        {detail.referralCode && (
-                          <div className="text-sm mt-2">
-                            <span className="bg-primary/10 text-primary px-2 py-1 rounded font-mono">
-                              Referral: {detail.referralCode}
-                            </span>
-                          </div>
-                        )}
+                        </div>
                       </div>
-                    ))}
-                  </div>
-                </CollapsibleContent>
-              </Collapsible>
+                    </DrawerContent>
+                  </Drawer>
+                </div>
+              </div>
             ))}
           </div>
         </div>

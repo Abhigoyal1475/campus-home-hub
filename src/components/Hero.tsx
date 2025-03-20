@@ -12,7 +12,7 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ className, onViewFees }) => {
   return (
     <section className={cn("relative overflow-hidden bg-gradient-to-b from-accent to-background pt-20 pb-24", className)}>
-      {/* Background decoration elements */}
+      {/* Background decoration elements - no blur */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full"></div>
         <div className="absolute top-20 -left-20 w-60 h-60 bg-primary/5 rounded-full"></div>
