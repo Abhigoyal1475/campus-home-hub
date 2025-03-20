@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { MapPin, Star, DollarSign, Building, Wifi, Dumbbell, Trees, Car, Tag, Users, Home } from 'lucide-react';
+import { MapPin, Star, DollarSign, Building, Wifi, Dumbbell, Trees, Car, Tag, Users, ChevronRight, ChevronLeft } from 'lucide-react';
 import Badge from './ui-components/Badge';
 import Button from './ui-components/Button';
 import { cn } from '../lib/utils';
@@ -23,6 +23,7 @@ export interface ListingProps {
   style?: React.CSSProperties;
   onCompare?: (id: string) => void;
   onView?: (id: string) => void;
+  images?: string[]; // New prop for multiple images
 }
 
 const ListingCard: React.FC<ListingProps> = ({
@@ -42,9 +43,14 @@ const ListingCard: React.FC<ListingProps> = ({
   className,
   style,
   onCompare,
-  onView
+  onView,
+  images = [] // Default to empty array
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // If no additional images provided, use the main imageUrl
+  const allImages = images.length > 0 ? images : [imageUrl];
   
   const getAmenityIcon = (amenity: string) => {
     switch (amenity.toLowerCase()) {
@@ -54,6 +60,16 @@ const ListingCard: React.FC<ListingProps> = ({
       case 'garden': return <Trees size={14} />;
       default: return <Building size={14} />;
     }
+  };
+
+  const nextImage = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent triggering card click
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % allImages.length);
+  };
+
+  const prevImage = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent triggering card click
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + allImages.length) % allImages.length);
   };
 
   return (
@@ -72,7 +88,44 @@ const ListingCard: React.FC<ListingProps> = ({
           "absolute inset-0 bg-cover bg-center transition-transform duration-700",
           isHovered ? "scale-105" : "scale-100"
         )}
-        style={{ backgroundImage: `url(${imageUrl})` }} />
+        style={{ backgroundImage: `url(${allImages[currentImageIndex]})` }} />
+        
+        {/* Image navigation arrows */}
+        {allImages.length > 1 && (
+          <>
+            <button 
+              onClick={prevImage}
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white/80 rounded-full flex items-center justify-center text-primary shadow-md opacity-0 group-hover:opacity-100 transition-opacity z-20"
+              aria-label="Previous image"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button 
+              onClick={nextImage}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white/80 rounded-full flex items-center justify-center text-primary shadow-md opacity-0 group-hover:opacity-100 transition-opacity z-20"
+              aria-label="Next image"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </>
+        )}
+        
+        {/* Image pagination dots */}
+        {allImages.length > 1 && (
+          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1 z-20">
+            {allImages.map((_, index) => (
+              <span 
+                key={index} 
+                className={cn(
+                  "w-2 h-2 rounded-full transition-all",
+                  index === currentImageIndex 
+                    ? "bg-white w-4" 
+                    : "bg-white/60"
+                )}
+              />
+            ))}
+          </div>
+        )}
         
         {/* Promo tag */}
         <div className="absolute top-4 left-4 z-10">

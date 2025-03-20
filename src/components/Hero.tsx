@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { ArrowRight, Search, MapPin, Building, DollarSign, Wifi } from 'lucide-react';
 import Button from './ui-components/Button';
 import { cn } from '../lib/utils';
@@ -10,33 +10,15 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ className, onViewFees }) => {
-  const heroRef = useRef<HTMLDivElement>(null);
-
-  // Parallax effect on scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!heroRef.current) return;
-      const scrollY = window.scrollY;
-      const opacity = Math.max(1 - scrollY / 500, 0);
-      const translateY = scrollY * 0.3;
-      
-      heroRef.current.style.opacity = opacity.toString();
-      heroRef.current.style.transform = `translateY(${translateY}px)`;
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <section className={cn("relative overflow-hidden bg-gradient-to-b from-accent to-background pt-20 pb-24", className)}>
       {/* Background decoration elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl"></div>
-        <div className="absolute top-20 -left-20 w-60 h-60 bg-primary/5 rounded-full blur-3xl"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full"></div>
+        <div className="absolute top-20 -left-20 w-60 h-60 bg-primary/5 rounded-full"></div>
       </div>
 
-      <div ref={heroRef} className="container px-4 mx-auto relative z-10">
+      <div className="container px-4 mx-auto relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-block px-3 py-1 mb-6 rounded-full bg-primary/10 text-primary animate-fade-in">
             <span className="text-sm font-medium">Perfect for Indian students!</span>
