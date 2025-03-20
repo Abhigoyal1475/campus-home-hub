@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ArrowLeft, Download, Info, DollarSign, Home, Clock, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, Download, Info, DollarSign, Home, Clock, AlertTriangle, Gift } from 'lucide-react';
 import Button from './ui-components/Button';
 import Badge from './ui-components/Badge';
 import { cn } from '../lib/utils';
@@ -31,16 +31,22 @@ const FeeBreakdown: React.FC<FeeBreakdownProps> = ({ onBack, className }) => {
           </Button>
           
           <h1 className="text-3xl md:text-4xl font-bold mb-4">Complete Apartment Fee Breakdown</h1>
-          <p className="text-lg text-muted-foreground mb-6">
+          <p className="text-lg text-muted-foreground mb-3">
             Understanding all the costs associated with renting an apartment is crucial for budgeting. 
             Here's a comprehensive breakdown of all possible fees you might encounter.
           </p>
           
-          <div className="bg-primary/5 p-4 rounded-lg mb-8 flex items-center">
-            <Info size={20} className="text-primary mr-3 flex-shrink-0" />
-            <p className="text-sm">
-              Not all properties charge all these fees. The specific costs vary by property and lease terms. 
-              Our referral program can help you save on many of these costs!
+          <div className="bg-primary/10 p-4 rounded-lg mb-8">
+            <h3 className="text-lg font-semibold mb-2 flex items-center text-primary">
+              <Gift size={20} className="mr-2" />
+              Special for Indian Students
+            </h3>
+            <p className="text-sm mb-3">
+              We've curated this list of properties where significant Indian communities already live, 
+              making it easier for you to find friends, share cultural experiences, and settle in comfortably.
+            </p>
+            <p className="text-sm font-medium">
+              Our referral program offers exclusive discounts up to $700 in total savings across various services!
             </p>
           </div>
         </div>
@@ -108,9 +114,9 @@ const FeeBreakdown: React.FC<FeeBreakdownProps> = ({ onBack, className }) => {
                     <p className="text-sm text-muted-foreground mb-2">
                       This is a one-time fee charged by the property management to process your application and prepare your lease documents.
                     </p>
-                    <div className="text-sm flex items-center text-primary">
-                      <Info size={14} className="mr-1" />
-                      <span>You can save on this fee with our referral program!</span>
+                    <div className="text-sm flex items-center text-primary font-medium">
+                      <Gift size={14} className="mr-1" />
+                      <span>Use our referral link and save $300 on this fee! Many properties waive it completely!</span>
                     </div>
                   </AccordionContent>
                 </AccordionItem>
@@ -123,9 +129,13 @@ const FeeBreakdown: React.FC<FeeBreakdownProps> = ({ onBack, className }) => {
                     </div>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-muted-foreground mb-2">
                       Fee charged to process your rental application, including background and credit checks.
                     </p>
+                    <div className="text-sm flex items-center text-primary font-medium">
+                      <Gift size={14} className="mr-1" />
+                      <span>Save $25-50 on this fee with our exclusive referral code!</span>
+                    </div>
                   </AccordionContent>
                 </AccordionItem>
                 
@@ -143,6 +153,10 @@ const FeeBreakdown: React.FC<FeeBreakdownProps> = ({ onBack, className }) => {
                     <div className="text-sm flex items-center text-amber-600">
                       <Info size={14} className="mr-1" />
                       <span>The amount varies based on your credit score and rental history.</span>
+                    </div>
+                    <div className="text-sm flex items-center text-primary font-medium mt-2">
+                      <Gift size={14} className="mr-1" />
+                      <span>Our referral program can reduce this deposit by up to $200!</span>
                     </div>
                   </AccordionContent>
                 </AccordionItem>
@@ -185,9 +199,9 @@ const FeeBreakdown: React.FC<FeeBreakdownProps> = ({ onBack, className }) => {
                     <p className="text-sm text-muted-foreground mb-2">
                       Insurance that protects your personal belongings and provides liability coverage.
                     </p>
-                    <div className="text-sm flex items-center text-primary">
-                      <Info size={14} className="mr-1" />
-                      <span>We can help you find affordable renters insurance starting at $10/month!</span>
+                    <div className="text-sm flex items-center text-primary font-medium">
+                      <Gift size={14} className="mr-1" />
+                      <span>Use our referral link to get 1 month FREE insurance, then just $10/month!</span>
                     </div>
                   </AccordionContent>
                 </AccordionItem>
@@ -217,9 +231,9 @@ const FeeBreakdown: React.FC<FeeBreakdownProps> = ({ onBack, className }) => {
                     <p className="text-sm text-muted-foreground mb-2">
                       Electricity charges based on your usage.
                     </p>
-                    <div className="text-sm flex items-center text-primary">
-                      <Info size={14} className="mr-1" />
-                      <span>Our referral program offers first month FREE electricity for students!</span>
+                    <div className="text-sm flex items-center text-primary font-medium">
+                      <Gift size={14} className="mr-1" />
+                      <span>Our referral program offers COMPLETELY FREE first month electricity for students! Save $50-100!</span>
                     </div>
                   </AccordionContent>
                 </AccordionItem>
@@ -232,9 +246,13 @@ const FeeBreakdown: React.FC<FeeBreakdownProps> = ({ onBack, className }) => {
                     </div>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-muted-foreground mb-2">
                       Gas charges for heating, cooking, etc. based on usage.
                     </p>
+                    <div className="text-sm flex items-center text-primary font-medium">
+                      <Gift size={14} className="mr-1" />
+                      <span>Use our referral code to get a $50 credit on your first gas bill!</span>
+                    </div>
                   </AccordionContent>
                 </AccordionItem>
                 
@@ -383,7 +401,7 @@ const FeeBreakdown: React.FC<FeeBreakdownProps> = ({ onBack, className }) => {
         {/* Savings and Referrals Section */}
         <div className="mt-12 p-6 rounded-xl bg-primary/5 border border-primary/10">
           <h2 className="text-xl font-bold mb-4 flex items-center">
-            <DollarSign size={20} className="mr-2 text-primary" />
+            <Gift size={20} className="mr-2 text-primary" />
             How Our Referral Program Saves You Money
           </h2>
           
@@ -394,7 +412,7 @@ const FeeBreakdown: React.FC<FeeBreakdownProps> = ({ onBack, className }) => {
                 Admin Fee Waiver
               </h3>
               <p className="text-sm text-muted-foreground">
-                Most properties will waive or reduce the admin fee when you use our referral link.
+                Most properties will completely waive the $300+ admin fee when you use our referral link!
               </p>
             </div>
             
@@ -404,7 +422,7 @@ const FeeBreakdown: React.FC<FeeBreakdownProps> = ({ onBack, className }) => {
                 WiFi Installation
               </h3>
               <p className="text-sm text-muted-foreground">
-                Get free installation and first month discounted with our partner ISPs.
+                Get completely FREE installation and first month service at 50% off with our partner ISPs!
               </p>
             </div>
             
@@ -414,7 +432,7 @@ const FeeBreakdown: React.FC<FeeBreakdownProps> = ({ onBack, className }) => {
                 First Month Electricity
               </h3>
               <p className="text-sm text-muted-foreground">
-                Our electricity partner offers first month free to new student accounts.
+                Our electricity partner offers first month COMPLETELY FREE to new student accounts!
               </p>
             </div>
             
@@ -424,7 +442,7 @@ const FeeBreakdown: React.FC<FeeBreakdownProps> = ({ onBack, className }) => {
                 Move-in Specials
               </h3>
               <p className="text-sm text-muted-foreground">
-                Many properties offer exclusive move-in specials like reduced deposits through our program.
+                Many properties offer exclusive move-in specials like $200 gift cards through our program!
               </p>
             </div>
           </div>

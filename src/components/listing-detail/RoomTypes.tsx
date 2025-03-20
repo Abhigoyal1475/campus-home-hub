@@ -21,20 +21,20 @@ const RoomTypes: React.FC<RoomTypesProps> = ({ roomTypes, className }) => {
     <div className={className}>
       <h3 className="text-xl font-bold mb-4">Available Room Types</h3>
       
-      <div className="space-y-4">
+      <div className="space-y-3">
         {roomTypes.map((room, index) => (
           <Card key={index} className="border border-primary/10">
-            <CardHeader className="pb-2">
-              <CardTitle className="flex justify-between items-center">
+            <CardHeader className="pb-2 p-3 md:p-4">
+              <CardTitle className="flex justify-between items-center text-base md:text-lg">
                 <span>{room.type}</span>
                 <span className="text-primary">{room.price}</span>
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground mb-1">{room.size}</p>
-              <p className="text-sm mb-2">{room.description}</p>
+            <CardContent className="p-3 md:p-4">
+              <p className="text-xs md:text-sm text-muted-foreground mb-1">{room.size}</p>
+              <p className="text-xs md:text-sm mb-2">{room.description}</p>
               {room.shared && room.perPerson && (
-                <div className="text-sm text-primary font-medium">
+                <div className="text-xs md:text-sm text-primary font-medium">
                   Shared option: {room.perPerson}
                 </div>
               )}

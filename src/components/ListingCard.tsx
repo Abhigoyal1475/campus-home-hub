@@ -108,7 +108,7 @@ const ListingCard: React.FC<ListingProps> = ({
             className="px-3 py-1 font-medium" 
             icon={<Tag size={14} />}
           >
-            Save ${discount} with referral
+            Save ${discount} with our referral
           </Badge>
         </div>
         
