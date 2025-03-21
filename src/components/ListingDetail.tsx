@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { MapPin, Star, DollarSign, Tag } from 'lucide-react';
 import { ListingProps } from './ListingCard';
 import Button from './ui-components/Button';
@@ -13,6 +13,8 @@ import LeaseSteps from './listing-detail/LeaseSteps';
 import CostBreakdown from './listing-detail/CostBreakdown';
 import StudentDeals from './listing-detail/StudentDeals';
 import ReviewSection from './ReviewSection';
+import GoogleMap from './listing-detail/GoogleMap';
+import WriteReviewForm from './listing-detail/WriteReviewForm';
 import { Bus, Car, FootprintsIcon } from 'lucide-react';
 
 interface ListingDetailProps {
@@ -22,6 +24,50 @@ interface ListingDetailProps {
 }
 
 const ListingDetail: React.FC<ListingDetailProps> = ({ listing, onBack, className }) => {
+  // State for managing reviews
+  const [reviews, setReviews] = useState([
+    {
+      id: '1',
+      name: 'Ananya Sharma',
+      date: 'August 2023',
+      rating: 5,
+      comment: 'I love living at this apartment! The Indian grocery store nearby is so convenient for me. The management is very responsive and the maintenance requests are handled promptly.',
+      helpful: 18,
+      isVerified: true
+    },
+    {
+      id: '2',
+      name: 'Raj Patel',
+      date: 'May 2023',
+      rating: 4,
+      comment: 'Great place for Indian students. We formed a good community here with weekend gatherings. The apartments are well-maintained and the bus route to university is reliable.',
+      helpful: 12,
+      isVerified: true
+    },
+    {
+      id: '3',
+      name: 'Deepika M.',
+      date: 'December 2022',
+      rating: 4,
+      comment: 'I\'ve been living here for 2 years and it\'s been a good experience. The location is convenient for Indian students - close to grocery stores, restaurants, and quick bus ride to campus.',
+      helpful: 7,
+      isVerified: false
+    }
+  ]);
+
+  // Handle adding a new review
+  const handleAddReview = (newReview: any) => {
+    setReviews([
+      {
+        id: (reviews.length + 1).toString(),
+        ...newReview,
+        helpful: 0,
+        isVerified: false
+      },
+      ...reviews
+    ]);
+  };
+  
   // Data definitions
   const costBreakdown = [
     { title: 'Application Fee', amount: '$50-100', oneTime: true },
@@ -48,10 +94,44 @@ const ListingDetail: React.FC<ListingDetailProps> = ({ listing, onBack, classNam
   ];
 
   const leaseSteps = [
-    { title: 'Submit Application', description: 'Complete the online rental application' },
-    { title: 'Pay Security Deposit', description: 'Secure your apartment with a deposit' },
-    { title: 'Set Up Utilities', description: 'Arrange for electricity, WiFi and more' },
-    { title: 'Move-in Day', description: 'Get your keys and settle into your new home!' }
+    { 
+      title: 'Submit Application', 
+      description: 'Complete the online rental application', 
+      details: [
+        'Application fee: $50-100 (non-refundable)',
+        'Required documents: ID, Proof of income/financial aid, Academic enrollment proof',
+        'Processing time: 24-48 hours'
+      ] 
+    },
+    { 
+      title: 'Pay Security Deposit', 
+      description: 'Secure your apartment with a deposit',
+      details: [
+        'Security deposit: $500-1000 (refundable)',
+        'Admin fee: $100-250 (non-refundable)',
+        'First month rent: Due before move-in'
+      ] 
+    },
+    { 
+      title: 'Set Up Utilities', 
+      description: 'Arrange for electricity, WiFi and more',
+      details: [
+        'Electricity: Contact City Power & Light (877-555-1234)',
+        'WiFi: Spectrum Student Offers available (866-555-4321)',
+        'Renters Insurance: Required - $10-15/month',
+        'Water/Sewer: Included in your monthly utility bill - $25-35/month'
+      ] 
+    },
+    { 
+      title: 'Move-in Day', 
+      description: 'Get your keys and settle into your new home!',
+      details: [
+        'Schedule move-in appointment',
+        'Complete move-in inspection form',
+        'Pick up keys from the leasing office',
+        'Set up community portal account for maintenance requests'
+      ] 
+    }
   ];
 
   // Room types with pricing
@@ -120,36 +200,9 @@ const ListingDetail: React.FC<ListingDetailProps> = ({ listing, onBack, classNam
     { name: 'Metro Bus Stop', distance: '2 minutes walk', type: 'transportation' }
   ];
 
-  // Mock reviews
-  const reviews = [
-    {
-      id: '1',
-      name: 'Ananya Sharma',
-      date: 'August 2023',
-      rating: 5,
-      comment: 'I love living at this apartment! The Indian grocery store nearby is so convenient for me. The management is very responsive and the maintenance requests are handled promptly.',
-      helpful: 18,
-      isVerified: true
-    },
-    {
-      id: '2',
-      name: 'Raj Patel',
-      date: 'May 2023',
-      rating: 4,
-      comment: 'Great place for Indian students. We formed a good community here with weekend gatherings. The apartments are well-maintained and the bus route to university is reliable.',
-      helpful: 12,
-      isVerified: true
-    },
-    {
-      id: '3',
-      name: 'Deepika M.',
-      date: 'December 2022',
-      rating: 4,
-      comment: 'I\'ve been living here for 2 years and it\'s been a good experience. The location is convenient for Indian students - close to grocery stores, restaurants, and quick bus ride to campus.',
-      helpful: 7,
-      isVerified: false
-    }
-  ];
+  // Property address and website
+  const propertyAddress = "123 College View Dr, University City, CA 92122";
+  const propertyWebsite = "https://www.stratfordapartments.com";
 
   return (
     <div className={cn("bg-white rounded-xl shadow-soft border border-primary/5 overflow-hidden", className)}>
@@ -233,7 +286,22 @@ const ListingDetail: React.FC<ListingDetailProps> = ({ listing, onBack, classNam
               <LeaseSteps
                 leaseSteps={leaseSteps}
                 className="mb-8"
+                propertyWebsite={propertyWebsite}
               />
+
+              {/* Google Map */}
+              <GoogleMap 
+                address={propertyAddress}
+                className="mb-8"
+              />
+
+              {/* Write Review CTA and Reviews */}
+              <WriteReviewForm 
+                onSubmitReview={handleAddReview}
+              />
+              
+              {/* Reviews moved to bottom */}
+              <ReviewSection reviews={reviews} className="mb-8" />
             </div>
             
             <div>
@@ -249,9 +317,6 @@ const ListingDetail: React.FC<ListingDetailProps> = ({ listing, onBack, classNam
               />
             </div>
           </div>
-          
-          {/* Reviews moved to bottom */}
-          <ReviewSection reviews={reviews} className="mb-8" />
         </div>
       </div>
     </div>
