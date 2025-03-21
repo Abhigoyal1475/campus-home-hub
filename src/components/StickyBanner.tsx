@@ -36,7 +36,7 @@ const StickyBanner: React.FC<StickyBannerProps> = ({ className }) => {
         hasScrolled ? "translate-y-0" : "translate-y-full",
         className
       )}>
-        <div className="glass-card mx-auto max-w-5xl m-4 px-4 py-3 rounded-xl shadow-soft border border-primary/10 flex items-center justify-between animate-slide-up">
+        <div className="glass-card mx-auto max-w-5xl m-4 px-4 py-4 rounded-xl shadow-soft border border-primary/10 flex flex-wrap md:flex-nowrap items-center justify-between gap-3 animate-slide-up">
           <div className="flex items-center space-x-3">
             <div className="hidden md:block w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
               <span className="text-primary text-xl font-bold">$</span>
@@ -46,17 +46,18 @@ const StickyBanner: React.FC<StickyBannerProps> = ({ className }) => {
               <p className="text-muted-foreground text-xs md:text-sm">Limited time offer for students</p>
             </div>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 ml-auto">
             <Button 
               variant="primary" 
               size="sm" 
               onClick={() => setDialogOpen(true)}
+              className="whitespace-nowrap"
             >
               See Offers
             </Button>
             <button 
               onClick={() => setIsVisible(false)}
-              className="text-muted-foreground hover:text-foreground p-1 rounded-full transition-colors"
+              className="text-muted-foreground hover:text-foreground p-1 rounded-full transition-colors flex-shrink-0"
               aria-label="Close banner"
             >
               <X size={16} />
