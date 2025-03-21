@@ -12,15 +12,22 @@ interface CostItem {
 
 interface CostBreakdownProps {
   costBreakdown: CostItem[];
+  totalInitial?: string;
+  totalMonthly?: string;
   className?: string;
 }
 
-const CostBreakdown: React.FC<CostBreakdownProps> = ({ costBreakdown, className }) => {
+const CostBreakdown: React.FC<CostBreakdownProps> = ({ 
+  costBreakdown, 
+  totalInitial,
+  totalMonthly,
+  className 
+}) => {
   return (
     <div className={cn("glass-card p-5 rounded-xl border border-primary/10", className)}>
       <h3 className="text-lg font-bold mb-4 flex items-center">
         <DollarSign size={18} className="text-primary mr-2" />
-        Fee Breakdown
+        Complete Fee Breakdown
       </h3>
       
       <div className="space-y-4">
@@ -32,6 +39,13 @@ const CostBreakdown: React.FC<CostBreakdownProps> = ({ costBreakdown, className 
               <span className="text-sm font-medium">{cost.amount}</span>
             </div>
           ))}
+          
+          {totalInitial && (
+            <div className="flex justify-between items-center py-2 mt-2 border-t border-dashed border-border">
+              <span className="text-sm font-bold">Total Initial Cost</span>
+              <span className="text-sm font-bold text-primary">{totalInitial}</span>
+            </div>
+          )}
         </div>
         
         <div>
@@ -47,6 +61,20 @@ const CostBreakdown: React.FC<CostBreakdownProps> = ({ costBreakdown, className 
               )}
             </div>
           ))}
+          
+          {totalMonthly && (
+            <div className="flex justify-between items-center py-2 mt-2 border-t border-dashed border-border">
+              <span className="text-sm font-bold">Total Monthly Cost</span>
+              <span className="text-sm font-bold text-primary">{totalMonthly}</span>
+            </div>
+          )}
+        </div>
+        
+        <div className="bg-primary/5 p-3 rounded-lg text-sm">
+          <p className="text-primary font-medium">Save big with our referrals!</p>
+          <p className="text-xs text-muted-foreground mt-1">
+            Use our exclusive referral codes to save up to $300 on fees and get your first month of utilities FREE.
+          </p>
         </div>
       </div>
     </div>

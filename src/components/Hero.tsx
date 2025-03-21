@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowRight, Search, MapPin, Building, DollarSign, Wifi } from 'lucide-react';
+import { ArrowRight, Search, MapPin, Building, DollarSign, Wifi, Users } from 'lucide-react';
 import Button from './ui-components/Button';
 import { cn } from '../lib/utils';
 
@@ -68,7 +68,7 @@ const Hero: React.FC<HeroProps> = ({ className, onViewFees }) => {
         {/* Feature cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mt-16 max-w-5xl mx-auto">
           {[
-            { icon: <MapPin size={20} />, title: "Perfect Location", description: "Find housing near your campus" },
+            { icon: <Users size={20} />, title: "Indian Community", description: "Find housing with established Indian communities" },
             { icon: <Building size={20} />, title: "Quality Housing", description: "Vetted properties for students" },
             { icon: <DollarSign size={20} />, title: "Student Savings", description: "Special rates and discounts" },
             { icon: <Wifi size={20} />, title: "All Utilities", description: "WiFi, electricity & more included" }

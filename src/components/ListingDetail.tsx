@@ -10,7 +10,6 @@ import RoomTypes from './listing-detail/RoomTypes';
 import TransportationOptions from './listing-detail/TransportationOptions';
 import NearbyPlaces from './listing-detail/NearbyPlaces';
 import LeaseSteps from './listing-detail/LeaseSteps';
-import FeesImage from './listing-detail/FeesImage';
 import CostBreakdown from './listing-detail/CostBreakdown';
 import StudentDeals from './listing-detail/StudentDeals';
 import ReviewSection from './ReviewSection';
@@ -28,11 +27,18 @@ const ListingDetail: React.FC<ListingDetailProps> = ({ listing, onBack, classNam
     { title: 'Application Fee', amount: '$50-100', oneTime: true },
     { title: 'Security Deposit', amount: '$500-1000', oneTime: true },
     { title: 'Admin Fee', amount: '$100-250', oneTime: true },
+    { title: 'First Month Rent', amount: listing.priceRange, oneTime: true },
+    { title: 'Monthly Rent', amount: listing.priceRange, oneTime: false },
     { title: 'Electricity', amount: '$40-80/month', oneTime: false },
     { title: 'WiFi', amount: '$40/month', oneTime: false, discount: 'or $20 with our referral!' },
     { title: 'Trash Service', amount: '$10/month', oneTime: false },
-    { title: 'Water/Sewer', amount: 'Usage-based', oneTime: false }
+    { title: 'Water/Sewer', amount: '$25-35/month', oneTime: false },
+    { title: 'Pest Control', amount: '$6/month', oneTime: false },
+    { title: 'Renters Insurance', amount: '$10-15/month', oneTime: false }
   ];
+
+  const totalInitialCost = `$${650 + parseInt(listing.priceRange.split('-')[0].replace('$', ''))} - $${1350 + parseInt(listing.priceRange.split('-')[1].replace('$', ''))}`;
+  const totalMonthlyCost = `$${parseInt(listing.priceRange.split('-')[0].replace('$', '')) + 81} - $${parseInt(listing.priceRange.split('-')[1].replace('$', '')) + 146}`;
 
   const dealsList = [
     { title: 'WiFi Installation', savings: '$100 off', description: 'Use our exclusive referral code' },
@@ -228,15 +234,13 @@ const ListingDetail: React.FC<ListingDetailProps> = ({ listing, onBack, classNam
                 leaseSteps={leaseSteps}
                 className="mb-8"
               />
-              
-              <FeesImage className="mb-8" />
-              
-              <ReviewSection reviews={reviews} className="mb-8" />
             </div>
             
             <div>
               <CostBreakdown
                 costBreakdown={costBreakdown}
+                totalInitial={totalInitialCost}
+                totalMonthly={totalMonthlyCost}
                 className="mb-6"
               />
               
@@ -245,6 +249,9 @@ const ListingDetail: React.FC<ListingDetailProps> = ({ listing, onBack, classNam
               />
             </div>
           </div>
+          
+          {/* Reviews moved to bottom */}
+          <ReviewSection reviews={reviews} className="mb-8" />
         </div>
       </div>
     </div>
