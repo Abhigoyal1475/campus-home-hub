@@ -8,6 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from './ui/dialog';
+import { ScrollArea } from './ui/scroll-area';
 import { cn } from '../lib/utils';
 import Badge from './ui-components/Badge';
 import Button from './ui-components/Button';
@@ -88,42 +89,44 @@ const SavingsDetailsDialog: React.FC<SavingsDetailsDialogProps> = ({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-4 my-4">
-          {savingsItems.map((item, index) => (
-            <div key={index} className="p-4 rounded-lg border bg-accent/20">
-              <div className="flex items-start">
-                <div className="mr-3 mt-1">
-                  {item.icon}
-                </div>
-                <div className="flex-1">
-                  <div className="flex justify-between items-center mb-1">
-                    <h3 className="font-medium">{item.title}</h3>
-                    <Badge variant="success">{item.amount}</Badge>
+        <ScrollArea className="max-h-[60vh] pr-4">
+          <div className="space-y-4 my-4">
+            {savingsItems.map((item, index) => (
+              <div key={index} className="p-4 rounded-lg border bg-accent/20">
+                <div className="flex items-start">
+                  <div className="mr-3 mt-1">
+                    {item.icon}
                   </div>
-                  <p className="text-sm text-muted-foreground mb-2">{item.description}</p>
-                  {item.link && (
-                    <a 
-                      href={item.link} 
-                      className="text-xs text-primary hover:underline inline-flex items-center"
-                    >
-                      {item.linkText} <ExternalLink size={12} className="ml-1" />
-                    </a>
-                  )}
+                  <div className="flex-1">
+                    <div className="flex justify-between items-center mb-1">
+                      <h3 className="font-medium">{item.title}</h3>
+                      <Badge variant="success">{item.amount}</Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-2">{item.description}</p>
+                    {item.link && (
+                      <a 
+                        href={item.link} 
+                        className="text-xs text-primary hover:underline inline-flex items-center"
+                      >
+                        {item.linkText} <ExternalLink size={12} className="ml-1" />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="bg-primary/10 p-4 rounded-lg">
-          <div className="flex justify-between items-center">
-            <h3 className="font-bold">Total Potential Savings:</h3>
-            <span className="text-lg font-bold text-primary">{totalSavings}</span>
+            ))}
           </div>
-          <p className="text-xs text-muted-foreground mt-1">
-            *Actual savings may vary based on property selection and service usage
-          </p>
-        </div>
+
+          <div className="bg-primary/10 p-4 rounded-lg">
+            <div className="flex justify-between items-center">
+              <h3 className="font-bold">Total Potential Savings:</h3>
+              <span className="text-lg font-bold text-primary">{totalSavings}</span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">
+              *Actual savings may vary based on property selection and service usage
+            </p>
+          </div>
+        </ScrollArea>
 
         <div className="mt-4">
           <Button variant="primary" className="w-full" size="lg">
