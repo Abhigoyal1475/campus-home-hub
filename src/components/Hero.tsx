@@ -16,7 +16,7 @@ const Hero: React.FC<HeroProps> = ({ className, onViewFees }) => {
       <div className="absolute inset-0 overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-15"
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80')` }}
+          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80')` }}
         ></div>
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full"></div>
         <div className="absolute top-20 -left-20 w-60 h-60 bg-primary/5 rounded-full"></div>
