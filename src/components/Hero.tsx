@@ -15,7 +15,7 @@ const Hero: React.FC<HeroProps> = ({ className, onViewFees }) => {
       {/* Background image - housing image for Indian students */}
       <div className="absolute inset-0 overflow-hidden">
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-80"
+          className="absolute inset-0 bg-cover bg-center opacity-50"
           style={{ backgroundImage: `url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80')` }}
         ></div>
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full"></div>
@@ -66,7 +66,7 @@ const Hero: React.FC<HeroProps> = ({ className, onViewFees }) => {
         </div>
 
         {/* Feature cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mt-16 max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mt-16 max-w-5xl mx-auto">
           {[
             { icon: <Users size={20} />, title: "Indian Community", description: "Find housing with established Indian communities" },
             { icon: <Building size={20} />, title: "Quality Housing", description: "Vetted properties for students" },
